@@ -4,18 +4,22 @@ import viteLogo from '/vite.svg';
 import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [counter, setCounter] = useState(0);
 
   useEffect(() => {
     console.log('useEffect starting');
 
     const intervalId = setInterval(() => {
-      setCount((prevCount) => prevCount + 1);
+      setCounter((prevCounter) => prevCounter + 1);
     }, 3000);
 
     // Cleanup the interval on component unmount
     return () => clearInterval(intervalId);
   }, []); // Empty dependency array ensures this effect runs once on mount
+
+  const handleReset = () => {
+    setCounter(0);
+  };
 
   return (
     <>
@@ -29,10 +33,8 @@ function App() {
       </div>
       <h1 className="big-font">Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <button onClick={() => setCount(0)}>Reset</button>
+        <div className="counter-display">{counter}</div>
+        <button onClick={handleReset}>Reset</button>
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
